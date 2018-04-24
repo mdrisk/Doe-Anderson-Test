@@ -2,12 +2,19 @@ body {
   margin: 0px;
   padding: 0px;
   height: 100vh;
+  font-family: 'Indie Flower', cursive;
 }
 a {
   text-decoration: none;
   color: black;
 }
 
+img {
+  border-radius: 50%;
+  border: 2px black solid;
+  align-self: center;
+  width: 80%;
+}
 .grid-container {
   height: 100%;
   display: grid;
@@ -17,7 +24,7 @@ a {
 .profile {
   grid-column: 1/2;
   grid-row: 1/3;
-  border: 2px red solid;
+  border: black 1px solid;
   padding: 2%;
 }
 /* inner grid */
@@ -32,7 +39,9 @@ a {
   grid-row: 1/2;
   height: 100%;
   padding: 2%;
+  display: flex;
   align-self: center;
+  justify-content: center;
 }
 .icons {
   grid-column: 2/3;
@@ -41,6 +50,7 @@ a {
   flex-flow: column;
   justify-content: space-around;
   padding: 2%;
+  padding-top: 5%;
 }
 .info {
   grid-column: 1/3;
@@ -50,13 +60,13 @@ a {
 .form-container {
   grid-column: 2/3;
   grid-row: 1/3;
-  border: 2px red solid;
+  border: black 1px solid;
   padding: 2%;
 }
 .footer {
   grid-column: 1/3;
   grid-row: 3/4;
-  border: 2px red solid;
+
   padding: 2%;
   display: flex;
   justify-content: space-around;
@@ -106,6 +116,48 @@ input[type='submit'] {
 #questionError {
   display: none;
   color: red;
+}
+
+/*Modal*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  display: flex;
+  align-items: center;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+#close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0px 10px;
+  color: red;
+}
+
+#close:hover,
+#close:focus {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
 }
 /* Responsive Media Query */
 @media only screen and (max-width: 640px) {
