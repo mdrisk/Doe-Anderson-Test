@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
       return response.json();
     })
     .then(function(myData) {
-      console.log(myData.results[0]);
+      // console.log(myData.results[0]);
 
+      //Capitalization of various data
       let fname = singleItem(myData.results[0].name.first);
       let fullname = arrayFunc(myData.results[0].name);
       let city = singleItem(myData.results[0].location.city);
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
       let address = `${myData.results[0].location.street} ${city}, ${state} ${
         myData.results[0].location.postcode
       }`;
+
       //Name
       let name = arrayFunc(myData.results[0].name);
       namefunc(name);
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
       document.getElementById('profile-pic').src =
         myData.results[0].picture.large;
 
-      //Info
+      //Initial Info
       document.getElementById(
         'info-paragraph'
       ).innerHTML = `Hi! My name is ${fname}! I'm so glad you visited this page! If you're ever in ${city} let's go sightseeing!`;
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
       //setup the icon functionality
       iconSetup(address, myData.results[0]);
 
-      //profile icon
+      //profile icon Here for access to local variables
       document
         .getElementById('icon1')
         .addEventListener(
@@ -42,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
         );
     });
 
+  //Form Validation Listeners when focus is lost
+  //could be done better, this code is not DRY
   document.getElementById('formName').addEventListener('blur', function() {
     if (!this.value) {
       document.getElementById('nameError').style.display = 'block';
@@ -64,13 +68,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   });
 
+  //Modal script, I am still learning modals
   document.getElementById('close').addEventListener('click', function() {
     document.getElementById('myModal').style.display = 'none';
   });
   window.addEventListener('click', function() {
     document.getElementById('myModal').style.display = 'none';
   });
-
   document.getElementById('myForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let modal = document.getElementById('myModal');
@@ -79,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   });
 });
 
+//Helper functions
 function arrayFunc(data) {
   return Object.values(data)
     .map(name => name[0].toUpperCase() + name.slice(1))
@@ -90,10 +95,11 @@ function singleItem(data) {
 }
 
 function namefunc(name) {
-  console.log(name);
   document.getElementById('name').innerHTML = name;
 }
 
+//Helper that sets up Icon click listeners
+//Again, not dry, definitely could be improved
 function iconSetup(address, data) {
   document.getElementById('icon2').addEventListener('click', function() {
     document.getElementById('info-paragraph').innerHTML = `Address: ${address}`;
@@ -110,6 +116,8 @@ function iconSetup(address, data) {
       data.phone
     } Cell: ${data.cell}`;
   });
+
+  //Better Birthday formatting
   let birthday = data.dob.split(' ');
   let format = birthday[0].split('-');
 
